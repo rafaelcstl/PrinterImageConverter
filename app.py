@@ -5,11 +5,20 @@ import argparse
 DEFAULT_INPUT = 'input.bmp'
 DEFAULT_OUTPUT = 'output.bmp'
 
+def removeAlphaChannel(image, args):
+    if image.mode in ('RGBA', 'LA'):
+        new_image = Image.new('RGB', image.size, 'white')
+        new_image.paste(image, (0,0), image)
+        image = new_image
+
+        if args.verbose:
+            print('Removed alpha channel')
+
+    return image
+
 def convertImageToIndexedChannel(image):
-    img = image.convert('L')
-    
-    threshold_value = 200
-    binary_image = image.point(lambda p: p > threshold_value and 255)
+    threshold_value = 225
+    binary_image = image.convert('L').point(lambda p: p > threshold_value and 255)
     indexed_image = binary_image.convert('1')
     return indexed_image
 
@@ -36,7 +45,8 @@ def app(args):
     if args.verbose:
         print(f'Processing image {args.image_in}')
     
-    output_image = resizeImage(input_image, args)
+    output_image = removeAlphaChannel(input_image, args)
+    output_image = resizeImage(output_image, args)
     
     if output_image.mode != '1':
         output_image = convertImageToIndexedChannel(output_image)
@@ -48,7 +58,7 @@ def app(args):
         if args.verbose:
             print('Converting image pixels...')
         
-        output_image = convertImagePixels(image)
+        output_image = convertImagePixels(output_image)
 
     if args.verbose:
         print('Image processing is done')
