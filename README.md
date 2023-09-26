@@ -2,7 +2,10 @@
 ## Funcionalidade
 Tem como objetivo converter uma imagem para o formato correto em que a impressora do fusion possa imprimir corretamente a imagem. Basicamente o processo é de tranformar a imagem do tipo RGB, RGBa... para o formato do tipo indexado, ou seja, cada pixel pode conter o valor 1 ou 0 (zero) para representar as cores preto ou branco. Também podemos converter as cores da imagem quando necessário, assim como poder definir o tamanho da imagem final.
 
-Usabilidade do script de conversão:
+## Requisitos
+
+
+## Usabilidade
 
 ```
 python app.py -h
