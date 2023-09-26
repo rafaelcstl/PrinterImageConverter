@@ -64,8 +64,8 @@ def app(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Fusion Image Converter', description='Convert a image to the proper format for using the fusion printer')
-    parser.add_argument('-I','--image-in', default=DEFAULT_INPUT, help='Image input path and name')
-    parser.add_argument('-O', '--image-output', default=DEFAULT_OUTPUT, help='Image ouput path and name')
+    parser.add_argument('-I','--image-in', default=DEFAULT_INPUT, help='Image input path and name\nDefault path: ./input.bmp')
+    parser.add_argument('-O', '--image-output', default=DEFAULT_OUTPUT, help='Image ouput path and name\nDefault path: ./ouput.bmp')
     parser.add_argument('-V', '--verbose', action='store_true', default=False)
     parser.add_argument('-R','--invert-pixels', action='store_true', default=False, help='Invert image pixel colors')
     parser.add_argument('-S', '--size-output', type=int, nargs=2, required=False, metavar=('width', 'height'), help='Set image size')
